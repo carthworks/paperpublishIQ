@@ -127,7 +127,7 @@ export default function ArchitectureSection() {
                 <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl" />
             </div>
 
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -145,7 +145,7 @@ export default function ArchitectureSection() {
                 </motion.div>
 
                 {/* Architecture Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 hidden">
                     {architectureComponents.map((component, index) => {
                         const Icon = component.icon;
                         return (

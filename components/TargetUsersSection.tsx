@@ -163,7 +163,7 @@ export default function TargetUsersSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3, duration: 0.6 }}
-                    className="grid grid-cols-2 md:grid-cols-4 gap-6"
+                    className="grid grid-cols-2 md:grid-cols-4 gap-6 hidden"
                 >
                     {[
                         { label: "Active Users", value: "10K+", color: "from-blue-500 to-cyan-500" },
