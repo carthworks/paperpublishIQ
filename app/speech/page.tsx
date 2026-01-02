@@ -88,19 +88,31 @@ export default function SpeechPage() {
             <div className="min-h-screen bg-gradient-to-br from-gray-950 via-blue-950 to-gray-950 flex items-center justify-center p-4">
                 <div className="w-full max-w-md">
                     <div className="bg-gray-900 border-2 border-gray-700 rounded-2xl p-8 shadow-2xl">
-                        {/* Lock Icon */}
+                        {/* Logo */}
                         <div className="flex justify-center mb-6">
-                            <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-teal-600 rounded-full flex items-center justify-center">
-                                <Lock className="w-8 h-8 text-white" />
+                            <div className="relative">
+                                {/* Gradient Background Circle */}
+                                <div className="w-24 h-24 bg-gradient-to-br from-blue-600 via-teal-500 to-blue-700 rounded-2xl flex items-center justify-center shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-300">
+                                    <div className="text-5xl">🎓</div>
+                                </div>
+                                {/* Lock Badge */}
+                                <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-r from-blue-600 to-teal-600 rounded-full flex items-center justify-center border-4 border-gray-900 shadow-lg">
+                                    <Lock className="w-5 h-5 text-white" />
+                                </div>
                             </div>
                         </div>
 
-                        {/* Title */}
-                        <h1 className="text-3xl font-bold text-center mb-2 bg-gradient-to-r from-blue-400 via-teal-400 to-blue-500 bg-clip-text text-transparent">
-                            Investor Pitch
-                        </h1>
-                        <p className="text-center text-gray-400 mb-8">
-                            Enter password to access teleprompter
+                        {/* Brand Name */}
+                        <div className="text-center mb-6">
+                            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-teal-400 to-blue-500 bg-clip-text text-transparent mb-1">
+                                PaperPublishIQ
+                            </h1>
+                            <p className="text-lg font-semibold text-gray-300">Investor Pitch</p>
+                        </div>
+
+                        {/* Subtitle */}
+                        <p className="text-center text-gray-400 mb-8 text-sm">
+                            🔒 Secure teleprompter access
                         </p>
 
                         {/* Password Form */}

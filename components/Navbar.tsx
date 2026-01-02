@@ -49,8 +49,8 @@ export default function Navbar() {
                 <div className="flex items-center justify-between">
                     {/* Logo */}
                     <Link href="#home" className="flex items-center space-x-2 group">
-                        <div className="w-10 h-10 bg-gradient-to-br from-blue-800 to-teal-600 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                            <span className="text-white font-bold text-xl">P</span>
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-800 to-teal-600 rounded-lg flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
+                            <span className="text-2xl">🎓</span>
                         </div>
                         <span className="text-xl font-bold gradient-text hidden sm:block">
                             PaperPublishIQ
