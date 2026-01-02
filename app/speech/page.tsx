@@ -1,298 +1,259 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Play, Pause, RotateCcw, Settings } from "lucide-react";
+import { useEffect, useState } from "react";
+import Teleprompter from "@/components/Teleprompter";
+import { Lock, Upload, FileText, Eye, EyeOff } from "lucide-react";
 
 export default function SpeechPage() {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [speed, setSpeed] = useState(30); // pixels per second
-    const [fontSize, setFontSize] = useState(24);
-    const [position, setPosition] = useState(0);
+    const [speechContent, setSpeechContent] = useState<string>("");
+    const [loading, setLoading] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState("");
+    const [uploadedFileName, setUploadedFileName] = useState("");
+    const [showUploadModal, setShowUploadModal] = useState(false);
+
+    // Password for accessing the teleprompter (change this to your desired password)
+    const CORRECT_PASSWORD = "investorpitch2026";
 
     useEffect(() => {
-        let interval: NodeJS.Timeout;
-        if (isPlaying) {
-            interval = setInterval(() => {
-                setPosition((prev) => prev + 1);
-            }, 1000 / speed);
+        // Check if already authenticated in session
+        const authenticated = sessionStorage.getItem("teleprompter_auth");
+        if (authenticated === "true") {
+            setIsAuthenticated(true);
+            loadDefaultContent();
+        } else {
+            setLoading(false);
         }
-        return () => clearInterval(interval);
-    }, [isPlaying, speed]);
+    }, []);
 
-    const resetPosition = () => {
-        setPosition(0);
-        setIsPlaying(false);
+    const loadDefaultContent = () => {
+        setLoading(true);
+        fetch("/speech-content.txt")
+            .then((response) => response.text())
+            .then((text) => {
+                setSpeechContent(text);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error loading speech content:", error);
+                setSpeechContent("Error loading speech content. Please upload a file.");
+                setLoading(false);
+            });
     };
 
-    const speechContent = `
-[OPENING - 30 seconds]
-
-Good morning. I'm here to talk about a $2.4 billion dollar problem that's costing PhD students their careers... and we have the solution.
-
-Academic publishing is broken. Let me show you exactly how broken.
-
-[THE PROBLEM - 60 seconds]
-
-Right now, if you're a PhD student trying to publish your research, you're looking at a 6 to 9 month wait. That's not just frustrating... that's twelve thousand dollars in delayed graduation costs. Per student.
-
-But it gets worse.
-
-Forty percent of peer review requests are being declined. Reviewers are burned out. The ones who DO review? They're giving low-quality feedback because they're not compensated. The result? A sixty percent rejection rate.
-
-Students are going through three to five revision cycles before acceptance. They have ZERO structured mentorship. And journals? They're drowning in fraud and plagiarism... ten thousand retractions every single year.
-
-This isn't a small problem. This is a crisis affecting eight point eight million researchers worldwide.
-
-[WHO PAYS VS WHO USES - 45 seconds]
-
-Now, here's what makes this interesting. We have a very clear customer segmentation.
-
-Who PAYS? Institutions. Specifically, funded PhD programs at top research universities. They're paying five thousand to fifty thousand dollars per year because delayed publications hurt their rankings and their funding.
-
-Who USES? Five distinct groups. PhD scholars submit papers. Mentors provide paid guidance. Peer reviewers get compensated for quality work. Editors make final decisions. And institutions manage the entire ecosystem.
-
-Our wedge customer? The top fifty US research universities with funded PhD programs. They have the budget. They have the pain. And they're ready to pay.
-
-[WHY NOW - 45 seconds]
-
-Three things are converging right now that make this the perfect time.
-
-First, AI maturity. Plagiarism detection is now ninety-five percent accurate. Large language models can pre-screen for structure and quality. AI-text detection prevents fraud. This technology is available NOW.
-
-Second, the review crisis has hit peak urgency. Reviewer acceptance rates have dropped from sixty percent to forty percent. Average review time has increased forty percent since twenty-twenty. Journals are desperate for solutions.
-
-Third, funding pressure. Universities need publication metrics for rankings. PhD programs are judged on time-to-degree. The willingness to pay for efficiency has never been higher.
-
-[TRACTION - 45 seconds]
-
-We're not just talking about this. We have real traction.
-
-Five pilot institutions have signed letters of intent. We have twelve hundred researchers on our waitlist. Forty-five PhD-level mentors are already onboarded. And we've reviewed one hundred twenty papers in our private beta with a four point seven out of five rating.
-
-We're in active discussions with three top-fifty US universities. Our advisory board includes two former journal editors and one university dean. This isn't vaporware. This is happening.
-
-[DEFENSIBILITY - 60 seconds]
-
-Now, you might be thinking... "Can't Elsevier or Springer just do this?"
-
-No. And here's why.
-
-We're building four compounding moats that get stronger over time.
-
-First, our reviewer reputation graph. Quality scores compound. Trusted reviewers get more work, earn more money, and lock into our platform.
-
-Second, institutional trust workflows. Compliance, audit trails, role-based access control... these take six to twelve months to build per institution. The switching cost increases with every use.
-
-Third, longitudinal data. We're collecting paper-to-author-to-reviewer-to-outcome data that creates predictive models our competitors simply cannot match. This data advantage grows exponentially.
-
-Fourth, journal integration pipelines. We support custom export formats for five hundred plus journals. That's two-plus years of engineering work.
-
-Why won't incumbents do this? Elsevier and Springer are protecting ten billion dollars in journal subscription revenue. ResearchGate has no review workflow. And AI startups lack institutional trust and compliance.
-
-[UNIT ECONOMICS - 60 seconds]
-
-Let's talk numbers.
-
-Our institutional customer acquisition cost is eight thousand dollars with a six-month sales cycle. Individual CAC is forty-five dollars through organic and paid channels. Payback period? Eight to twelve months.
-
-Revenue: Average institutional contract is twenty-five thousand dollars annually for fifty users. Our gross margin is seventy percent after mentor and reviewer payouts. We take an eighteen percent platform fee on the mentor marketplace.
-
-Costs: Review cost per paper is one hundred twenty dollars... that's two reviewers at sixty dollars each. Mentor sessions cost eighty dollars, we keep twenty. Infrastructure is three dollars per user per month.
-
-Path to profitability? We break even in Q4 twenty-twenty-six with fifty institutions and one point two five million in ARR. Our lifetime value to CAC ratio is three point five X.
-
-[GO-TO-MARKET - 45 seconds]
-
-Our go-to-market strategy is phased and proven.
-
-Phase one: Q1 to Q2 twenty-twenty-six. Five to ten pilot universities. Inside sales plus warm introductions. Six-month sales cycle. Target: five hundred active users, one hundred twenty-five thousand in ARR.
-
-Phase two: Q3 to Q4 twenty-twenty-six. Partner with three to five mid-tier journals. Co-marketing and integrated workflows. Nine-month partnership cycle. Target: two thousand users, five hundred thousand in ARR.
-
-Phase three: Twenty-twenty-seven. Expand to top two hundred universities plus international. Outbound SDR team and channel partners. Three-month sales cycle with our proven model. Target: ten thousand users, two point five million in ARR.
-
-Who signs the contracts? Graduate school deans with budget authority. Research VPs for university-wide initiatives. And department chairs for smaller, faster deals.
-
-[RISKS - 45 seconds]
-
-Let's be transparent about risks.
-
-Liability for bad reviews? We're a marketplace, not a decision-maker. We have insurance coverage and editor validation.
-
-Are we influencing acceptance decisions? No. We provide feedback. Journals and editors make final decisions. It's in our terms of service.
-
-COPE and ethics alignment? Our advisory board includes COPE members. Blind review is enforced. Conflict-of-interest checks are automated.
-
-Data privacy? SOC 2 Type II certification is in progress. We offer data residency options. Anonymization by default.
-
-Incumbent retaliation? We're complementary to journals, not competitive. Our partnership model reduces the threat.
-
-[USE OF FUNDS - 45 seconds]
-
-We're raising a two million dollar seed round. Here's exactly what it unlocks.
-
-Eight hundred thousand for engineering. That's four engineers for eighteen months.
-
-Five hundred thousand for sales and marketing. Two SDRs plus demand generation.
-
-Four hundred thousand for operations. Compliance and support infrastructure.
-
-Three hundred thousand runway buffer. That gives us twenty-four months total.
-
-What does two million dollars buy you? Eighteen to twenty-four month runway to reach one point two five million in ARR, fifty institutions, and Series A readiness. Our Series A target is ten to fifteen million dollars.
-
-[CLOSING - 30 seconds]
-
-Academic publishing is broken. Eight point eight million researchers are suffering. Universities are paying the price in rankings and funding.
-
-We have the solution. We have early traction. We have defensible moats. And we have a clear path to profitability.
-
-The market is two point four billion dollars. We're capturing it one institution at a time.
-
-We're raising two million dollars to reach break-even and Series A readiness.
-
-Who's ready to join us?
-
-[END]
-
----
-
-PRONUNCIATION GUIDE:
-- ARR: A-R-R (Annual Recurring Revenue)
-- CAC: C-A-C (Customer Acquisition Cost)
-- COPE: C-O-P-E (Committee on Publication Ethics)
-- SOC 2: S-O-C Two (Service Organization Control)
-- PhD: P-H-D (Doctor of Philosophy)
-- SDR: S-D-R (Sales Development Representative)
-- LTV: L-T-V (Lifetime Value)
-- API: A-P-I (Application Programming Interface)
-
-TIMING GUIDE:
-- Total speech: ~8-10 minutes
-- Speak at 120-140 words per minute
-- Pause after each section
-- Make eye contact during key numbers
-- Slow down for important statistics
-
-EMPHASIS POINTS:
-- "$2.4 billion" - pause after
-- "6 to 9 months" - emphasize the pain
-- "60% rejection rate" - let it sink in
-- "Five pilot institutions" - show momentum
-- "70% gross margin" - strong economics
-- "Break even Q4 2026" - clear path
-`;
-
-    return (
-        <div className="min-h-screen bg-gray-950 text-white">
-            {/* Control Panel */}
-            <div className="fixed top-0 left-0 right-0 bg-gray-900 border-b border-gray-700 p-4 z-50">
-                <div className="container mx-auto flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                        <button
-                            onClick={() => setIsPlaying(!isPlaying)}
-                            className="p-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
-                        >
-                            {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
-                        </button>
-                        <button
-                            onClick={resetPosition}
-                            className="p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-                        >
-                            <RotateCcw className="w-6 h-6" />
-                        </button>
-                    </div>
-
-                    <div className="flex items-center space-x-6">
-                        <div className="flex items-center space-x-2">
-                            <Settings className="w-5 h-5 text-gray-300" />
-                            <label className="text-sm text-gray-300">Speed:</label>
-                            <input
-                                type="range"
-                                min="10"
-                                max="60"
-                                value={speed}
-                                onChange={(e) => setSpeed(Number(e.target.value))}
-                                className="w-32"
-                            />
-                            <span className="text-sm text-gray-300 w-12">{speed}px/s</span>
+    const handlePasswordSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (password === CORRECT_PASSWORD) {
+            setIsAuthenticated(true);
+            sessionStorage.setItem("teleprompter_auth", "true");
+            setError("");
+            loadDefaultContent();
+        } else {
+            setError("Incorrect password. Please try again.");
+            setPassword("");
+        }
+    };
+
+    const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            if (file.type === "text/plain" || file.name.endsWith(".txt")) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const content = event.target?.result as string;
+                    setSpeechContent(content);
+                    setUploadedFileName(file.name);
+                    setShowUploadModal(false);
+                };
+                reader.readAsText(file);
+            } else {
+                alert("Please upload a .txt file");
+            }
+        }
+    };
+
+    const handleLogout = () => {
+        setIsAuthenticated(false);
+        sessionStorage.removeItem("teleprompter_auth");
+        setPassword("");
+        setSpeechContent("");
+        setUploadedFileName("");
+    };
+
+    // Password Entry Screen
+    if (!isAuthenticated) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-gray-950 via-blue-950 to-gray-950 flex items-center justify-center p-4">
+                <div className="w-full max-w-md">
+                    <div className="bg-gray-900 border-2 border-gray-700 rounded-2xl p-8 shadow-2xl">
+                        {/* Lock Icon */}
+                        <div className="flex justify-center mb-6">
+                            <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-teal-600 rounded-full flex items-center justify-center">
+                                <Lock className="w-8 h-8 text-white" />
+                            </div>
                         </div>
 
-                        <div className="flex items-center space-x-2">
-                            <label className="text-sm text-gray-300">Font:</label>
-                            <input
-                                type="range"
-                                min="16"
-                                max="48"
-                                value={fontSize}
-                                onChange={(e) => setFontSize(Number(e.target.value))}
-                                className="w-32"
-                            />
-                            <span className="text-sm text-gray-300 w-12">{fontSize}px</span>
-                        </div>
-                    </div>
-
-                    <div className="text-sm text-gray-300 font-semibold">
-                        Teleprompter Mode
-                    </div>
-                </div>
-            </div>
-
-            {/* Reading Area with Center Line */}
-            <div className="fixed top-1/2 left-0 right-0 h-1 bg-green-500 opacity-70 z-40 pointer-events-none" />
-
-            {/* Speech Content */}
-            <div className="pt-24 pb-screen min-h-screen">
-                <div
-                    className="container mx-auto px-8 max-w-4xl transition-transform duration-100"
-                    style={{
-                        transform: `translateY(${-position}px)`,
-                        paddingTop: "50vh",
-                        paddingBottom: "50vh",
-                    }}
-                >
-                    <div
-                        className="leading-relaxed whitespace-pre-wrap text-white"
-                        style={{
-                            fontSize: `${fontSize}px`,
-                            fontFamily: 'system-ui, -apple-system, sans-serif',
-                            lineHeight: '1.8'
-                        }}
-                    >
-                        {speechContent}
-                    </div>
-                </div>
-            </div>
-
-            {/* Instructions Overlay (shows when paused) */}
-            {!isPlaying && position === 0 && (
-                <div className="fixed inset-0 bg-gray-950 bg-opacity-95 flex items-center justify-center z-50">
-                    <div className="bg-gray-900 border-2 border-gray-700 rounded-2xl p-12 max-w-2xl text-center">
-                        <h1 className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-teal-400 to-blue-500 bg-clip-text text-transparent">
-                            Investor Pitch Teleprompter
+                        {/* Title */}
+                        <h1 className="text-3xl font-bold text-center mb-2 bg-gradient-to-r from-blue-400 via-teal-400 to-blue-500 bg-clip-text text-transparent">
+                            Investor Pitch
                         </h1>
-                        <div className="space-y-4 text-left text-lg text-gray-200">
-                            <p>✅ <strong className="text-white">Press Play</strong> to start scrolling</p>
-                            <p>✅ <strong className="text-white">Adjust Speed</strong> to match your speaking pace</p>
-                            <p>✅ <strong className="text-white">Green Line</strong> shows your reading position</p>
-                            <p>✅ <strong className="text-white">Pause</strong> anytime to review</p>
-                            <p>✅ <strong className="text-white">Reset</strong> to start over</p>
-                        </div>
-                        <div className="mt-8 p-4 bg-blue-900/40 border border-blue-700 rounded-lg">
-                            <p className="text-sm text-blue-200">
-                                💡 <strong>Pro Tip:</strong> Practice 3-5 times before your actual pitch. Aim for 8-10 minutes total.
+                        <p className="text-center text-gray-400 mb-8">
+                            Enter password to access teleprompter
+                        </p>
+
+                        {/* Password Form */}
+                        <form onSubmit={handlePasswordSubmit} className="space-y-4">
+                            <div className="relative">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="Enter password"
+                                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors pr-12"
+                                    autoFocus
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300 transition-colors"
+                                >
+                                    {showPassword ? (
+                                        <EyeOff className="w-5 h-5" />
+                                    ) : (
+                                        <Eye className="w-5 h-5" />
+                                    )}
+                                </button>
+                            </div>
+
+                            {error && (
+                                <div className="bg-red-900/30 border border-red-700 rounded-lg p-3 text-red-400 text-sm">
+                                    {error}
+                                </div>
+                            )}
+
+                            <button
+                                type="submit"
+                                className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300"
+                            >
+                                Access Teleprompter
+                            </button>
+                        </form>
+
+                        {/* Info */}
+                        <div className="mt-6 p-4 bg-blue-900/20 border border-blue-800 rounded-lg">
+                            <p className="text-xs text-blue-300 text-center">
+                                🔒 Secure access for authorized users only
                             </p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // Loading Screen
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500 mx-auto mb-4"></div>
+                    <div className="text-white text-xl">Loading speech content...</div>
+                </div>
+            </div>
+        );
+    }
+
+    // Upload Modal
+    const UploadModal = () => (
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[100] p-4">
+            <div className="bg-gray-900 border-2 border-gray-700 rounded-2xl p-8 max-w-md w-full">
+                <h2 className="text-2xl font-bold text-white mb-4">Upload Speech Content</h2>
+                <p className="text-gray-400 mb-6">
+                    Upload a .txt file with your speech content
+                </p>
+
+                <div className="space-y-4">
+                    {/* File Input */}
+                    <label className="block">
+                        <div className="border-2 border-dashed border-gray-700 rounded-lg p-8 text-center hover:border-blue-500 transition-colors cursor-pointer">
+                            <Upload className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                            <p className="text-white font-semibold mb-1">Click to upload</p>
+                            <p className="text-sm text-gray-400">or drag and drop</p>
+                            <p className="text-xs text-gray-500 mt-2">TXT files only</p>
+                        </div>
+                        <input
+                            type="file"
+                            accept=".txt,text/plain"
+                            onChange={handleFileUpload}
+                            className="hidden"
+                        />
+                    </label>
+
+                    {/* Current File */}
+                    {uploadedFileName && (
+                        <div className="bg-green-900/20 border border-green-700 rounded-lg p-3 flex items-center space-x-2">
+                            <FileText className="w-5 h-5 text-green-400" />
+                            <span className="text-green-400 text-sm">{uploadedFileName}</span>
+                        </div>
+                    )}
+
+                    {/* Buttons */}
+                    <div className="flex space-x-3">
                         <button
-                            onClick={() => setIsPlaying(true)}
-                            className="mt-8 px-8 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2 mx-auto"
+                            onClick={() => setShowUploadModal(false)}
+                            className="flex-1 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
                         >
-                            <Play className="w-6 h-6" />
-                            <span>Start Practicing</span>
+                            Cancel
+                        </button>
+                        <button
+                            onClick={() => {
+                                loadDefaultContent();
+                                setShowUploadModal(false);
+                                setUploadedFileName("");
+                            }}
+                            className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                        >
+                            Load Default
                         </button>
                     </div>
                 </div>
-            )}
+            </div>
+        </div>
+    );
+
+    // Main Teleprompter with Upload Button
+    return (
+        <div className="relative">
+            {/* Upload & Logout Buttons */}
+            <div className="fixed top-20 right-4 z-50 flex flex-col space-y-2">
+                <button
+                    onClick={() => setShowUploadModal(true)}
+                    className="p-3 bg-blue-600 hover:bg-blue-700 rounded-lg shadow-lg transition-colors group"
+                    title="Upload speech file"
+                >
+                    <Upload className="w-5 h-5 text-white" />
+                </button>
+                <button
+                    onClick={handleLogout}
+                    className="p-3 bg-red-600 hover:bg-red-700 rounded-lg shadow-lg transition-colors"
+                    title="Logout"
+                >
+                    <Lock className="w-5 h-5 text-white" />
+                </button>
+            </div>
+
+            {/* Upload Modal */}
+            {showUploadModal && <UploadModal />}
+
+            {/* Teleprompter */}
+            <Teleprompter
+                content={speechContent}
+                title="Investor Pitch Teleprompter"
+                defaultSpeed={30}
+                defaultFontSize={24}
+            />
         </div>
     );
 }
