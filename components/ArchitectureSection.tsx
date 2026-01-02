@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Database, Cloud, Lock, Layers, Code, Zap, ArrowRight, Bot, FileSearch, Users, CheckCircle } from "lucide-react";
+import { Database, Cloud, Lock, Layers, Code, Zap, ArrowRight, Bot, FileSearch, Users, CheckCircle, Building2 } from "lucide-react";
 
 const architectureComponents = [
     {
@@ -86,6 +86,19 @@ const userFlows = [
             { label: "Submit Decision", desc: "Recommendation" },
             { label: "Get Validated", desc: "Editor check" },
             { label: "Earn Recognition", desc: "Certificates" },
+        ],
+    },
+    {
+        role: "Institution",
+        icon: Building2,
+        color: "from-orange-500 to-red-500",
+        steps: [
+            { label: "Setup Platform", desc: "Configure users & roles" },
+            { label: "Monitor Activity", desc: "Track submissions" },
+            { label: "Review Analytics", desc: "Quality metrics" },
+            { label: "Manage Budget", desc: "Allocate resources" },
+            { label: "Generate Reports", desc: "Publication stats" },
+            { label: "Maintain Standards", desc: "Quality assurance" },
         ],
     },
 ];
