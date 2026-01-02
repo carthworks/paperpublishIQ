@@ -10,6 +10,7 @@ const navItems = [
     { name: "Architecture", href: "#architecture" },
     { name: "Workflow", href: "#workflow" },
     { name: "Target Users", href: "#target-users" },
+    { name: "Investor Pitch", href: "/investor-pitch" },
     { name: "Contact", href: "#contact" },
 ];
 
