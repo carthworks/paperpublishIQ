@@ -33,16 +33,35 @@ export default function ContactSection() {
         setIsSubmitting(true);
         setSubmitStatus("idle");
 
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
 
-        console.log("Form data:", data);
-        setIsSubmitting(false);
-        setSubmitStatus("success");
-        reset();
+            const result = await response.json();
 
-        // Reset status after 5 seconds
-        setTimeout(() => setSubmitStatus("idle"), 5000);
+            if (response.ok) {
+                setIsSubmitting(false);
+                setSubmitStatus("success");
+                reset();
+
+                // Reset status after 5 seconds
+                setTimeout(() => setSubmitStatus("idle"), 5000);
+            } else {
+                throw new Error(result.error || 'Failed to send message');
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            setIsSubmitting(false);
+            setSubmitStatus("error");
+
+            // Reset error status after 5 seconds
+            setTimeout(() => setSubmitStatus("idle"), 5000);
+        }
     };
 
     return (
@@ -174,7 +193,16 @@ export default function ContactSection() {
                                         animate={{ opacity: 1, y: 0 }}
                                         className="p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg text-center"
                                     >
-                                        Message sent successfully! We'll get back to you soon.
+                                        ✅ Message sent successfully! We'll get back to you soon.
+                                    </motion.div>
+                                )}
+                                {submitStatus === "error" && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="p-4 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg text-center"
+                                    >
+                                        ❌ Failed to send message. Please try again or email us directly at tkarthikeyan@gmail.com
                                     </motion.div>
                                 )}
                             </form>
