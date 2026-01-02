@@ -54,10 +54,10 @@ export default function Footer() {
                         {/* Social Links */}
                         <div className="flex space-x-3">
                             {[
-                                { icon: Twitter, href: "#", label: "Twitter" },
-                                { icon: Linkedin, href: "#", label: "LinkedIn" },
-                                { icon: Github, href: "#", label: "GitHub" },
-                                { icon: Mail, href: "#contact", label: "Email" },
+                                { icon: Twitter, href: "https://twitter.com/carthworks", label: "Twitter" },
+                                { icon: Linkedin, href: "https://www.linkedin.com/in/carthworks/", label: "LinkedIn" },
+                                { icon: Github, href: "https://github.com/carthworks", label: "GitHub" },
+                                { icon: Mail, href: "mailto:tkarthikeyan@gmail.com", label: "Email" },
                             ].map((social, index) => {
                                 const Icon = social.icon;
                                 return (
