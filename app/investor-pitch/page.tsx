@@ -291,6 +291,378 @@ export default function InvestorPitchPage() {
                 </div>
             </section>
 
+            {/* Subscription Pricing Model */}
+            <section className="py-20 bg-gradient-to-b from-background to-slate-50/30 dark:to-slate-950/10">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-12"
+                    >
+                        <h2 className="text-4xl font-bold mb-4">
+                            Subscription <span className="gradient-text">Pricing Model</span>
+                        </h2>
+                        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                            Flexible pricing tiers designed for individual researchers, students, and institutions.
+                        </p>
+                    </motion.div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                        {/* Free Tier */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0 }}
+                            className="glass rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-blue-200 dark:hover:border-blue-800"
+                        >
+                            <div className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2">FREE</div>
+                            <h3 className="text-3xl font-bold mb-2">$0</h3>
+                            <p className="text-sm text-muted-foreground mb-6">Per month</p>
+
+                            <ul className="space-y-3 mb-8">
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>1 paper submission per month</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Basic AI screening</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Community forum access</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Standard support</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm text-muted-foreground">
+                                    <span className="w-4 h-4 mt-0.5">✗</span>
+                                    <span>Mentor matching</span>
+                                </li>
+                            </ul>
+
+                            <div className="text-center">
+                                <div className="text-xs text-muted-foreground">Perfect for exploring</div>
+                            </div>
+                        </motion.div>
+
+                        {/* Student Tier */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="glass rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-800"
+                        >
+                            <div className="text-sm font-semibold text-teal-600 dark:text-teal-400 mb-2">STUDENT</div>
+                            <h3 className="text-3xl font-bold mb-2">$29</h3>
+                            <p className="text-sm text-muted-foreground mb-6">Per month</p>
+
+                            <ul className="space-y-3 mb-8">
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>5 paper submissions/month</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Advanced AI screening</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Mentor matching (2/month)</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Plagiarism detection</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Priority email support</span>
+                                </li>
+                            </ul>
+
+                            <div className="text-center">
+                                <div className="text-xs text-muted-foreground">Most popular for students</div>
+                            </div>
+                        </motion.div>
+
+                        {/* Professional Tier */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="glass rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 border-2 border-blue-400 dark:border-blue-600 relative"
+                        >
+                            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-blue-800 to-teal-600 text-white text-xs font-bold rounded-full">
+                                RECOMMENDED
+                            </div>
+                            <div className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2">PROFESSIONAL</div>
+                            <h3 className="text-3xl font-bold mb-2">$99</h3>
+                            <p className="text-sm text-muted-foreground mb-6">Per month</p>
+
+                            <ul className="space-y-3 mb-8">
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Unlimited submissions</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Premium AI features</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Unlimited mentor sessions</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Priority peer review</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Advanced analytics</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>24/7 priority support</span>
+                                </li>
+                            </ul>
+
+                            <div className="text-center">
+                                <div className="text-xs text-muted-foreground">Best for researchers</div>
+                            </div>
+                        </motion.div>
+
+                        {/* Institutional Tier */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                            className="glass rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-slate-200 dark:hover:border-slate-800"
+                        >
+                            <div className="text-sm font-semibold text-slate-600 dark:text-slate-400 mb-2">INSTITUTIONAL</div>
+                            <h3 className="text-3xl font-bold mb-2">Custom</h3>
+                            <p className="text-sm text-muted-foreground mb-6">Contact sales</p>
+
+                            <ul className="space-y-3 mb-8">
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Unlimited users</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>White-label options</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Custom integrations</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>Dedicated account manager</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>API access</span>
+                                </li>
+                                <li className="flex items-start space-x-2 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                    <span>SLA guarantee</span>
+                                </li>
+                            </ul>
+
+                            <div className="text-center">
+                                <div className="text-xs text-muted-foreground">For universities</div>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Pricing Notes */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 }}
+                        className="mt-12 text-center max-w-3xl mx-auto"
+                    >
+                        <div className="glass rounded-xl p-6">
+                            <p className="text-sm text-muted-foreground mb-4">
+                                <strong>Annual billing:</strong> Save 20% with annual subscriptions
+                            </p>
+                            <div className="grid md:grid-cols-3 gap-4 text-xs text-muted-foreground">
+                                <div>
+                                    <strong>Student verification:</strong> Valid .edu email required
+                                </div>
+                                <div>
+                                    <strong>Volume discounts:</strong> Available for 10+ users
+                                </div>
+                                <div>
+                                    <strong>Free trial:</strong> 14-day trial on all paid plans
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Supported Journals */}
+            <section className="py-20">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-12"
+                    >
+                        <h2 className="text-4xl font-bold mb-4">
+                            Supported <span className="gradient-text">Journals & Publishers</span>
+                        </h2>
+                        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                            Export publication-ready papers to major academic journals and publishers worldwide.
+                        </p>
+                    </motion.div>
+
+                    {/* Major Publishers */}
+                    <div className="mb-12">
+                        <h3 className="text-2xl font-bold text-center mb-8">Major Publishers</h3>
+                        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+                            {[
+                                { name: "Elsevier", journals: "2,500+ journals" },
+                                { name: "Springer Nature", journals: "3,000+ journals" },
+                                { name: "Wiley", journals: "1,700+ journals" },
+                                { name: "IEEE", journals: "200+ journals" },
+                                { name: "ACM", journals: "50+ journals" },
+                            ].map((publisher, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="glass rounded-xl p-6 text-center hover:shadow-xl transition-all duration-300 group"
+                                >
+                                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-800 to-teal-600 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <Globe className="w-8 h-8 text-white" />
+                                    </div>
+                                    <h4 className="font-bold mb-2">{publisher.name}</h4>
+                                    <p className="text-xs text-muted-foreground">{publisher.journals}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Top Journals by Field */}
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[
+                            {
+                                field: "Computer Science",
+                                journals: [
+                                    "IEEE Transactions on Pattern Analysis",
+                                    "ACM Computing Surveys",
+                                    "Nature Machine Intelligence",
+                                    "Journal of Machine Learning Research",
+                                ]
+                            },
+                            {
+                                field: "Medicine & Health",
+                                journals: [
+                                    "The Lancet",
+                                    "New England Journal of Medicine",
+                                    "JAMA",
+                                    "BMJ",
+                                ]
+                            },
+                            {
+                                field: "Engineering",
+                                journals: [
+                                    "Nature Engineering",
+                                    "IEEE Transactions",
+                                    "Applied Energy",
+                                    "Engineering Structures",
+                                ]
+                            },
+                            {
+                                field: "Natural Sciences",
+                                journals: [
+                                    "Nature",
+                                    "Science",
+                                    "PNAS",
+                                    "Cell",
+                                ]
+                            },
+                            {
+                                field: "Social Sciences",
+                                journals: [
+                                    "American Economic Review",
+                                    "Psychological Science",
+                                    "Journal of Finance",
+                                    "Management Science",
+                                ]
+                            },
+                            {
+                                field: "Multidisciplinary",
+                                journals: [
+                                    "PLOS ONE",
+                                    "Scientific Reports",
+                                    "Royal Society Open Science",
+                                    "Frontiers",
+                                ]
+                            },
+                        ].map((category, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                className="glass rounded-xl p-6 hover:shadow-xl transition-all duration-300"
+                            >
+                                <h4 className="text-lg font-bold mb-4 gradient-text">{category.field}</h4>
+                                <ul className="space-y-2">
+                                    {category.journals.map((journal, jIndex) => (
+                                        <li key={jIndex} className="flex items-start space-x-2 text-sm">
+                                            <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                                            <span>{journal}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Export Formats */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.5 }}
+                        className="mt-12 glass rounded-2xl p-8 text-center"
+                    >
+                        <h3 className="text-2xl font-bold mb-6">Supported Export Formats</h3>
+                        <div className="grid md:grid-cols-4 gap-6">
+                            {[
+                                { format: "IEEE", description: "Conference & Journals" },
+                                { format: "ACM", description: "SIG Proceedings" },
+                                { format: "APA 7th", description: "Social Sciences" },
+                                { format: "LaTeX", description: "Custom Templates" },
+                            ].map((format, index) => (
+                                <div key={index} className="p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
+                                    <div className="font-bold mb-1">{format.format}</div>
+                                    <div className="text-xs text-muted-foreground">{format.description}</div>
+                                </div>
+                            ))}
+                        </div>
+                        <p className="text-sm text-muted-foreground mt-6">
+                            + Custom formatting for 500+ additional journals
+                        </p>
+                    </motion.div>
+                </div>
+            </section>
+
             {/* Competitive Advantages */}
             <section className="py-20 bg-gradient-to-b from-background to-blue-50/30 dark:to-blue-950/10">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
