@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "academic writing",
     "publication",
   ],
-  authors: [{ name: "PaperPublishIQ Team" }],
+  authors: [{ name: "PaperPublishIQ Team tkarthikeyan@gmail.com" }],
   openGraph: {
     title: "PaperPublishIQ - Research Paper Mentoring & Peer Review Platform",
     description: "Transform your research paper from draft to publication-ready with expert mentoring and blind peer review.",
@@ -33,6 +33,11 @@ export const metadata: Metadata = {
   },
   viewport: "width=device-width, initial-scale=1",
   robots: "index, follow",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
@@ -43,7 +48,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+        <link rel="shortcut icon" href="/favicon.png" />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
