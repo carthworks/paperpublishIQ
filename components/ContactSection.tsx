@@ -195,19 +195,19 @@ export default function ContactSection() {
                                 {
                                     icon: Mail,
                                     title: "Email",
-                                    content: "contact@paperpublishiq.com",
+                                    content: "tkarthikeyan@gmail.com",
                                     color: "from-blue-500 to-cyan-500",
                                 },
                                 {
                                     icon: Phone,
                                     title: "Phone",
-                                    content: "+1 (555) 123-4567",
+                                    content: "+91 9486772206",
                                     color: "from-purple-500 to-pink-500",
                                 },
                                 {
                                     icon: MapPin,
                                     title: "Location",
-                                    content: "123 Research Ave, Academic City, AC 12345",
+                                    content: "chennai, India",
                                     color: "from-green-500 to-emerald-500",
                                 },
                             ].map((item, index) => {
@@ -242,9 +242,9 @@ export default function ContactSection() {
                             <h3 className="font-semibold mb-4">Follow Us</h3>
                             <div className="flex space-x-4">
                                 {[
-                                    { icon: Twitter, href: "#", color: "hover:text-blue-400" },
-                                    { icon: Linkedin, href: "#", color: "hover:text-blue-600" },
-                                    { icon: Github, href: "#", color: "hover:text-gray-700 dark:hover:text-gray-300" },
+                                    { icon: Twitter, href: "https://x.com/carthworks", color: "hover:text-blue-400" },
+                                    { icon: Linkedin, href: "https://www.linkedin.com/in/carthworks/", color: "hover:text-blue-600" },
+                                    { icon: Github, href: "https://github.com/carthworks", color: "hover:text-gray-700 dark:hover:text-gray-300" },
                                 ].map((social, index) => {
                                     const Icon = social.icon;
                                     return (
